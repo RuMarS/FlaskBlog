@@ -1,0 +1,31 @@
+<!--DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Проба пера с Flask</title>
+</head>
+<body>
+    <h1>
+        Добро пожаловать в наш блог, сделанный во Flask!
+    </h1>
+</body>
+</html-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>
+        {% block title %} Добро пожаловать в наш блог, сделанный во Flask! {% endblock %}
+    </h1>
+    {% for post in posts %}
+        <a href="{{ url_for('post', post_id=post['id']) }}">
+            <h2> {{ post['title'] }} </h2>
+        </a>
+    <span class="badge badge-primary"> {{ post['created'] }} </span>
+    <a href="{{url_for('edit', post_id= post['id'])}}">
+        <span class="bage bage-warning"> Редактировать </span>
+    </a>
+    <hr>
+    {% endfor %}
+{% endblock %}
